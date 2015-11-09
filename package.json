@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "fine template",
   "main": "gulpfile.js",
-  "repository" : "https://github.com/DoYouLikeOrigami/Loftschool-Teamwork",
+  "repository": "https://github.com/DoYouLikeOrigami/Loftschool-Teamwork",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,7 +18,9 @@
     "gulp-jade": "^1.1.0",
     "gulp-plumber": "^1.0.1",
     "gulp-rename": "^1.2.2",
+    "gulp-size": "^2.0.0",
     "gulp-uglify": "^1.4.1",
-    "gulp-util": "^3.0.6"
+    "gulp-util": "^3.0.6",
+    "vinyl-ftp": "^0.4.5"
   }
 }
