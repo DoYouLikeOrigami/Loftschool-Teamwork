@@ -1,3 +1,9 @@
+a,
+input[type="file"],
+input[type="submit"] {
+  cursor: url(/img/cursor.png), pointer;
+}
+
 @import "compass";
 
 /* --------- normalize --------- */

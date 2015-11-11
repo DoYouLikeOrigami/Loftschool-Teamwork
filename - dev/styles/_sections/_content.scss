@@ -1,0 +1,28 @@
+.content-wrapper {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  margin: auto;
+}
+
+.main {
+  float: left;
+  width: 650px;
+  background: #645e60;
+  padding: 25px;
+}
+
+.main__title {
+  font-family: 'Segoe UI';
+  font-weight: 100;
+  font-size: 36px;
+  line-height: 40px;
+  color: #ffffff;
+  margin-bottom: 55px;
+}
+
+.main__content {
+  width: 650px;
+  height: 535px;
+  background: #ffffff;
+}

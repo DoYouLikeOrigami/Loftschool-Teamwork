@@ -1,0 +1,11 @@
+.container_footer {
+  @extend .container;
+  padding: 8px 15px;
+}
+
+.copyright {
+  font-size: 12px;
+  line-height: 14px;
+  margin: auto;
+  text-align: center;
+}

@@ -1,0 +1,83 @@
+.sidebar {
+  float: right;
+  width: 259px;
+  border-left: 1px solid #b2b0b1;
+  background: #f1f1f5;
+  box-sizing: border-box;
+}
+
+.sidebar__title {
+  font-size: 26px;
+  line-height: 28px;
+  padding: 30px 65px;
+  color: #000000;
+}
+
+.sidebar__item {
+  position: relative;
+  padding: 0 20px;
+  padding-bottom: 20px;
+  margin-bottom: 17px;
+  border-bottom: 1px solid #f4c3c2;
+
+  &:after {
+    content: '';
+    background: url(../img/border-arrow.png) no-repeat;
+    @include absolute-center;
+    top: 100%;
+    margin: 0 auto;
+    width: 19px;
+    height: 11px;
+  }
+}
+
+.sidebar__label {
+  font-size: 14px;
+  line-height: 16px;
+  color: #000000;
+}
+
+.sidebar__form-label-wrapper {
+  margin-top: 5px;
+  margin-bottom: 25px;
+  @include clearfix;
+}
+
+.sidebar__form-input {
+  float: left;
+  height: 27px;
+  width: 178px;
+  border: 1px solid #9eb2c0;
+  border-right: none;
+  @include border-radius(5px 0 0 5px);
+  background: #f1f1f5;
+  color: #a4b6c4;
+  padding: 4px 7px;
+  font-size: 12px;
+  line-height: 14px;
+  box-sizing: border-box;
+  outline: 0;
+}
+
+.sidebar__form-label_file {
+  float: right;
+  height: 27px;
+  width: 39px;
+  @include border-radius(0 5px 5px 0);
+  background: url(/img/upload.png) center no-repeat #f97e76;
+}
+
+.sidebar__form-input_file {
+  height: 27px;
+  border: 0;
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+  padding-left: 39px;
+  outline: 0;
+}
+
+.sidebar__label_position {
+  @extend .sidebar__label;
+  margin-top: 8px;
+}
