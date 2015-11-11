@@ -16,4 +16,39 @@ sidebar.sidebar
               input(name="" type="file").sidebar__form-input_file
     li.sidebar__item
       form.sidebar__form
-        label.sidebar__label_position Положение
+        .sidebar__lable Положение
+        .sidebar__form-label-wrapper
+          .sidebar__form-label-wrapper_position
+              - for (var i = 1; i < 10; i++)
+                label.choose
+                  input(class="choose__input choose__input_" + i name="radio" type="radio" value="position")
+                  div(class="choose__style choose__style_" + i)
+          .sidebar__form-label-wrapper_move
+            .move__wrapper_top
+              label.move__label.move__label_X X
+                input(name="" type="text").move__input
+                .arrow_top
+                .arrow_bot
+            .move__wrapper_bottom
+              label.move__label.move__label_Y Y
+                input(name="" type="text").move__input
+                .arrow_top
+                .arrow_bot
+    li.sidebar__item
+      form.sidebar__form
+        .sidebar__lable Прозрачность
+        .sidebar__form-label-wrapper
+          div(class="slider" data-min="0" data-max="1")
+    li.sidevar__item
+      form.sidebar__form
+        .sidebar__form-label-wrapper_btns
+          input(name="" type="reset" class="btn btn_reset" value="Сброс")
+          input(name="" type="submit" class="btn btn_submit" value="Скачать")
+
+
+
+
+
+
+
+

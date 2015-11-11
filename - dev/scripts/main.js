@@ -7,7 +7,15 @@ var team9WatermarkGeneratorModule = (function () {
   };
 
   var _setUpListners = function () {
-
+    if ($('.slider').length){
+      $('.slider').slider({
+        range: true,
+        min: parseInt($('.slider').data('min')),
+        max: parseInt($('.slider').data('max')),
+        step: 0.01,
+        values: [0, 0.5]
+      });
+    }
   };
 
   return {
@@ -16,4 +24,12 @@ var team9WatermarkGeneratorModule = (function () {
 
 })();
 
-myModule.init();
+/* --------- DOCUMENT READY --------- */
+
+$(document).ready(function(){
+
+
+
+});
+
+team9WatermarkGeneratorModule.init();
