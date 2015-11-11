@@ -7,6 +7,17 @@ var team9WatermarkGeneratorModule = (function () {
   };
 
   var _setUpListners = function () {
+
+    /* --------- DOCUMENT READY --------- */
+
+    $(document).ready(function(){
+      _sliderWidget(),
+      $('#main-file').on('change', _addTextToMainInput)
+      $('#water-file').on('change', _addTextToWaterInput)
+    });
+  };
+
+  var _sliderWidget = function () {
     if ($('.slider').length){
       $('.slider').slider({
         range: true,
@@ -18,18 +29,36 @@ var team9WatermarkGeneratorModule = (function () {
     }
   };
 
+  var _addTextToMainInput = function(e) {
+    e.preventDefault();
+
+    console.log($(this));
+
+
+    var input = $(this),
+        name = input.val()
+
+    $('#main-text').val(name.replace(/C:\\fakepath\\/, ""));
+
+  };
+
+  var _addTextToWaterInput = function(e) {
+    e.preventDefault();
+
+    console.log($(this));
+
+
+    var input = $(this),
+        name = input.val()
+
+    $('#water-text').val(name.replace(/C:\\fakepath\\/, ""));
+
+  };
+
   return {
     init: init
   };
 
 })();
-
-/* --------- DOCUMENT READY --------- */
-
-$(document).ready(function(){
-
-
-
-});
 
 team9WatermarkGeneratorModule.init();

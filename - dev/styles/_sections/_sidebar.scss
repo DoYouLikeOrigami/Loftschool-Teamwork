@@ -43,6 +43,11 @@
   margin-bottom: 30px;
 }
 
+.sidebar__form {
+  width: 217px;
+  margin: auto;
+}
+
 .sidebar__form-label-wrapper {
   @include clearfix;
   margin-top: 5px;
@@ -59,6 +64,7 @@
   background: #f1f1f5;
   color: #a4b6c4;
   padding: 4px 7px;
+  @include roboto();
   font-size: 12px;
   line-height: 14px;
   box-sizing: border-box;
@@ -264,7 +270,7 @@ $arrows-map: sprite-map('arrows/*.png', $spacing: 50px);
 
 .sidebar__form-label-wrapper_btns {
   @include clearfix;
-  margin: 25px 11px;
+  margin: 25px 0px;
 }
 
 .btn {
