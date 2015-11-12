@@ -34,8 +34,8 @@ var team9WatermarkGeneratorModule = (function () {
                 } else {
                     // создаем обертку для изображения
                     console.log('создаем обертку для изображения');
-                    $(".main__content").append("<div class='wrapper__img'></div>");
-                    $(".wrapper__img").append("<div class='wrapper__img-resize'></div>");
+                    $(".main__content").html("<div class='wrapper__img'></div>");
+                    $(".wrapper__img").html("<div class='wrapper__img-resize'></div>");
 
                 }
 
