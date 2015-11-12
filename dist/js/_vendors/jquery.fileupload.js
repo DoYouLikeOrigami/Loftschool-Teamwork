@@ -102,7 +102,7 @@
             // each input field change event. This is required for iframe transport
             // queues and allows change events to be fired for the same file
             // selection, but can be disabled by setting the following option to false:
-            replaceFileInput: true,
+            replaceFileInput: false,
             // The parameter name for the file form data (the request argument name).
             // If undefined or empty, the name property of the file input field is
             // used, or "files[]" if the file input name property is also empty,
