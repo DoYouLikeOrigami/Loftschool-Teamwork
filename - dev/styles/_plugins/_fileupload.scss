@@ -4,11 +4,11 @@
     height: 100%;
     width: 100%;
     margin: 0 auto;
-    // overflow: hidden;
+    overflow: hidden;
 }
 
 .wrapper__img-resize {
-    position: relative;
+    position: absolute;
     display:block;
     top:0;
     bottom: 0;
