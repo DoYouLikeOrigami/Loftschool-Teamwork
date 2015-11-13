@@ -12,84 +12,100 @@ var team9WatermarkGeneratorModule = (function () {
         $('#main-file').fileupload({
             dataType: 'json',
             acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
-            // Enable image resizing, except for Android and Opera,
-            // which actually support image resizing, but fail to
-            // send Blob objects via XHR requests:
             disableImageResize: /Android(?!.*Chrome)|Opera/
                 .test(window.navigator && navigator.userAgent),
-        // Uncomment the following to send cross-domain cookies:
-        //xhrFields: {withCredentials: true},
         url: 'server/php/',
-
         add: function(e, data) {
             console.log('add');
             data.submit();
         },
-
         done: function(e, data) {
              var  uploadImg = data.result.files[0];
-            
              if ($('.wrapрer__img').length > 0) {
                     $('.img-upload').remove();
                 } else {
                     // создаем обертку для изображения
-                    console.log('создаем обертку для изображения');
-                    $(".main__content").html("<div class='wrapper__img'></div>");
-                    $(".wrapper__img").html("<div class='wrapper__img-resize'></div>");
-
+                    // $(".main__content").html("<div class='wrapper__img'></div>");
+                    // $(".wrapper__img").html("<div class='wrapper__img-resize'></div>");
                 }
-
-
             // создаем наше изображения(загружаем его на сервер)
-            console.log('создаем наше изображения(загружаем его на сервер)');
-            var img = $('<img></img>'),
-                uploadImg = data.result.files[0];
+            var img = $('<img></img>');
             img.attr('src', uploadImg.url);
             img.addClass('img-upload');
+            img.fadeIn('.wrapper__img-resize');
             img.appendTo('.wrapper__img-resize');
-
-
             img.load(function () {
-                    // удаляем атрибуты width и height
-                    console.log('удаляем атрибуты width и height');
-                    $(this).removeAttr("width")
-                        .removeAttr("height")
-                        .css({
-                            width: "",
-                            height: ""
-                        });
-
-                    // получаем  цифры размера изображения
-                    console.log('начинаем получать цифры размера изображения из дополнительных классов, wrapper__image');
+                    // получаем  цифры размера изображения из дополнительных классов
                     var width = $(this).width(),
                         height = $(this).height(),
-                        
-                        sizeHeight = $('.wrapper__img').height(),
-                        sizeWidth = $('.wrapper__img').width(),
+                        sizeHeight = $('.main__content').height(),
+                        sizeWidth = $('.main__content').width(),
                         sizeBox = sizeWidth / sizeHeight,
                         setResize = function (cssResize, heightR, widthR) {
                             img.addClass(cssResize);
-
                             $('.wrapper__img-resize').css({
                                 'height': heightR + 'px',
                                 'width': widthR + 'px'
                             });
                         };
-                         console.log('заканчиваем получение размера изображения');
+                         
                     // и масштабируем его добавочным классом
-                    console.log('масштабируем добавочным классом');
                     if ((width < sizeWidth) && (height < sizeHeight)) {
                         setResize('', height, width);
                     } else if (sizeBox < width / height) {
                         setResize('img-upload-widthR ', Math.round(sizeWidth * height / width), sizeWidth);
-
                     } else {
                         setResize('img-upload-heightR ', sizeHeight, Math.round(sizeHeight * width / height));
-                    }
-
-                });
+                }
+            });
         }
     });
+   //событие отправки вотермарка на сервер
+     $('#water-file').fileupload({
+            dataType: 'json',
+            acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+            disableImageResize: /Android(?!.*Chrome)|Opera/
+                .test(window.navigator && navigator.userAgent),
+              url: 'server/php/',
+            add: function (e, data) { // отправляем картинку на сервер
+                data.submit();
+            },
+            done: function (e, data) {
+                var uploadWtm = data.result.files[0];
+                    var wrapper = $(".watermark__img-wrapper");
+                $(".wrapper__img-resize").append("<div class='watermark__img-wrapper'></div>");
+                    var imgWtm = $('<img></img>');
+                        imgWtm.attr('src', uploadWtm.url);
+                        imgWtm.addClass('img-watermark');
+                        imgWtm.fadeIn('.watermark__img-wrapper');
+                $(".watermark__img-wrapper").html(imgWtm);
+                 imgWtm.load(function () {
+                    
+                     // получаем  цифры размера изображения
+                    var width = $(this).width(),
+                        height = $(this).height(),
+                        sizeHeight = $('.watermark__img-wrapper').height(),
+                        sizeWidth = $('.watermark__img-wrapper').width(),
+                        sizeBox = sizeWidth / sizeHeight,
+                        setResize = function (cssResize, heightR, widthR) {
+                        imgWtm.addClass(cssResize);
+                        $('.watermark__img-wrapper').css({
+                            'height': heightR + 'px',
+                            'width': widthR + 'px'
+                        });
+                    };
+                    // и масштабируем его добавочным классом
+                    if ((width < sizeWidth) && (height < sizeHeight)) {
+                        setResize('', height, width);
+                    } else if (sizeBox < width / height) {
+                        setResize('img-upload-widthR ', Math.round(sizeWidth * height / width), sizeWidth);
+                    } else {
+                        setResize('img-upload-heightR ', sizeHeight, Math.round(sizeHeight * width / height));
+                }
+            });
+        }
+    });
+
 
     /* --------- DOCUMENT READY --------- */
 
