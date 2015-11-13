@@ -7,17 +7,17 @@
 
 var
 	gulp        = require('gulp'),
-	compass     = require('gulp-compass'),
+	//compass     = require('gulp-compass'),
 	jade        = require('gulp-jade'),
 	browserSync = require('browser-sync').create(),
-  gutil       = require('gulp-util'),
-  ftp         = require('vinyl-ftp'),
+  	gutil       = require('gulp-util'),
+  	ftp         = require('vinyl-ftp'),
 	browserify  = require('gulp-browserify'),
 	uglify      = require('gulp-uglify'),
 	rename      = require('gulp-rename'),
 	plumber     = require('gulp-plumber'),
 	concat      = require('gulp-concat'),
-  size        = require('gulp-size');
+  	size        = require('gulp-size');
 
 
 
@@ -84,7 +84,7 @@ gulp.task('sync', function() {
 
 gulp.task('watch', function(){
   gulp.watch(paths.jade.location, ['jade']);
-  gulp.watch(paths.scss.location, ['compass']);
+  //gulp.watch(paths.scss.location, ['compass']);
   gulp.watch(paths.js.location, ['scripts']);
   gulp.watch(paths.js.plugins, ['plugins']);
   gulp.watch(paths.browserSync.watchPaths).on('change', browserSync.reload);
@@ -102,7 +102,7 @@ gulp.task('jade', function() {
 });
 
 /* --------- SCSS-COMPASS - compass --------- */
-
+/*
 gulp.task('compass', function() {
 	gulp.src(paths.scss.location)
 		.pipe(plumber())
@@ -113,6 +113,7 @@ gulp.task('compass', function() {
 			image: paths.compass.imgFolder
 		}));
 });
+*/
 
 /* --------- PLUGINS - plugins, sctipts --------- */
 
@@ -164,7 +165,7 @@ gulp.task('deploy', function() {
 
 /* --------- DEFAULT - gulp --------- */
 
-gulp.task('default', ['jade', 'compass', 'plugins', 'scripts', 'sync', 'watch']);
+gulp.task('default', ['jade', 'plugins', 'scripts', 'sync', 'watch']);
 
 gulp.task('go-away', ['size'], function () {
     gulp.start('deploy');
