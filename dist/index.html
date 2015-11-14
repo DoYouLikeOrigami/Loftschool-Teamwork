@@ -6,7 +6,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<title>Name</title><link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-touch-icon-57x57.png">
+		<title>WATERMARK IT INC.</title><link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-touch-icon-57x57.png">
 		<link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-touch-icon-60x60.png">
 		<link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-touch-icon-72x72.png">
 		<link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-touch-icon-76x76.png">
@@ -36,20 +36,126 @@
 		<p class="chromeframe">Похоже, что ты используешь устаревший браузер, друг. Пожалуйста, <a href="http://browsehappy.com/">скачай новый браузер абсолютно бесплатно</a> или <a href="http://www.google.com/chromeframe/?redirect=true">активируй Google Chrome Frame</a></p>
 		<![endif]-->
 		<div class="wrapper">
-			<div class="maincontent">
+			<div class="container_middle">
 				<div class="container">
-					<div class="wrapper">
-						<div class="block"></div>
+					<div class="main">
+						<div class="main__title">Генератор водяных знаков</div>
+						<div class="main__content"></div>
 					</div>
-					<div class="controls"><a href="#" class="controls__move controls__move-left"></a><a href="#" class="controls__move controls__move-right"></a></div>
+					<sidebar class="sidebar">
+						<div class="sidebar__title">Настройки</div>
+						<ul class="sidebar__list">
+							<li class="sidebar__item">
+								<form class="sidebar__form">
+									<label class="sidebar__label">Исходное изображение
+										<div class="sidebar__form-label-wrapper">
+											<input name="" type="text" readonly id="main-text" class="sidebar__form-input">
+											<label class="sidebar__form-label_file">
+												<input name="" type="file" id="main-file" class="sidebar__form-input_file">
+											</label>
+										</div>
+									</label>
+									<label class="sidebar__label">Водяной знак
+										<div class="sidebar__form-label-wrapper">
+											<input name="" type="text" readonly id="water-text" class="sidebar__form-input">
+											<label class="sidebar__form-label_file">
+												<input name="" type="file" id="water-file" class="sidebar__form-input_file">
+											</label>
+										</div>
+									</label>
+								</form>
+							</li>
+							<li class="sidebar__item">
+								<form class="sidebar__form">
+									<div class="sidebar__lable">Положение</div>
+									<div class="sidebar__form-label-wrapper">
+										<div class="sidebar__form-label-wrapper_position">
+											<label class="choose">
+												<input name="radio" type="radio" value="position" class="choose__input choose__input_1">
+												<div class="choose__style choose__style_1"></div>
+											</label>
+											<label class="choose">
+												<input name="radio" type="radio" value="position" class="choose__input choose__input_2">
+												<div class="choose__style choose__style_2"></div>
+											</label>
+											<label class="choose">
+												<input name="radio" type="radio" value="position" class="choose__input choose__input_3">
+												<div class="choose__style choose__style_3"></div>
+											</label>
+											<label class="choose">
+												<input name="radio" type="radio" value="position" class="choose__input choose__input_4">
+												<div class="choose__style choose__style_4"></div>
+											</label>
+											<label class="choose">
+												<input name="radio" type="radio" value="position" class="choose__input choose__input_5">
+												<div class="choose__style choose__style_5"></div>
+											</label>
+											<label class="choose">
+												<input name="radio" type="radio" value="position" class="choose__input choose__input_6">
+												<div class="choose__style choose__style_6"></div>
+											</label>
+											<label class="choose">
+												<input name="radio" type="radio" value="position" class="choose__input choose__input_7">
+												<div class="choose__style choose__style_7"></div>
+											</label>
+											<label class="choose">
+												<input name="radio" type="radio" value="position" class="choose__input choose__input_8">
+												<div class="choose__style choose__style_8"></div>
+											</label>
+											<label class="choose">
+												<input name="radio" type="radio" value="position" class="choose__input choose__input_9">
+												<div class="choose__style choose__style_9"></div>
+											</label>
+										</div>
+										<div class="sidebar__form-label-wrapper_move">
+											<div class="move__wrapper_top">
+												<label class="move__label move__label_X">X
+													<input name="" type="text" class="move__input"><a class="arrow_top"></a><a class="arrow_bot"></a>
+												</label>
+											</div>
+											<div class="move__wrapper_bottom">
+												<label class="move__label move__label_Y">Y
+													<input name="" type="text" class="move__input"><a class="arrow_top"></a><a class="arrow_bot"></a>
+												</label>
+											</div>
+										</div>
+									</div>
+								</form>
+							</li>
+							<li class="sidebar__item">
+								<form class="sidebar__form">
+									<div class="sidebar__lable">Прозрачность</div>
+									<div class="sidebar__form-label-wrapper">
+										<div data-min="0" data-max="1" class="slider"></div>
+									</div>
+								</form>
+							</li>
+							<li class="sidevar__item">
+								<form class="sidebar__form">
+									<div class="sidebar__form-label-wrapper_btns">
+										<input name="" type="reset" value="Сброс" class="btn btn_reset">
+										<input name="" type="submit" value="Скачать" class="btn btn_submit">
+									</div>
+								</form>
+							</li>
+						</ul>
+					</sidebar>
 				</div>
 			</div>
 		</div>
-		<script src=""></script>
+		<footer class="footer">
+			<div class="container_footer">
+				<div class="copyright">© 2015. Это сайт team9, пожалуйста, не копируйте и не воруйте его</div>
+			</div>
+		</footer>
+		<script src="js/_vendors/jquery-1.11.3.min.js"></script>
 		<script>
 			window.jQuery || document.write('<script src="/js/_vendors/jquery-1.11.3.min.js"><\/script>');
 			
 		</script>
+		<script src="js/_vendors/jquery.ui.widget.js"></script>
+		<script src="js/_vendors/jquery.iframe-transport.js"></script>
+		<script src="js/_vendors/jquery.fileupload.js"></script>
 		<script src="js/plugins.min.js"></script>
 		<script src="js/main.min.js"></script>
 	</body>

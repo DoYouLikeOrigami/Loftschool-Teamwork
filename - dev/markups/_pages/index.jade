@@ -1,12 +1,14 @@
 extends ../main
 
 block title
-	| Name
+  | WATERMARK IT INC.
 
-block mainContent
-	.container
-		.wrapper
-			.block
-		.controls
-			a(href="#").controls__move.controls__move-left
-			a(href="#").controls__move.controls__move-right
+block content
+        .container_middle
+          .container
+            .main
+              .main__title
+                | Генератор водяных знаков
+              .main__content
+
+            include ../_common/_sidebar

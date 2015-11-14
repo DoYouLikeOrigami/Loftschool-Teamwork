@@ -41,17 +41,22 @@ html
         <![endif]-->
 
         .wrapper
-            .maincontent
-                block mainContent
+            block content
 
-        //-         block content
+        include _common/_footer
 
-        //- include _common/_footer
-
-        script(src='')
+        script(src='js/_vendors/jquery-1.11.3.min.js')
         script.
             window.jQuery || document.write('<script src="/js/_vendors/jquery-1.11.3.min.js"><\/script>');
-
+        
+        script(src='js/_vendors/jquery.ui.widget.js')
+        script(src='js/_vendors/jquery.iframe-transport.js')
+        script(src='js/_vendors/jquery.fileupload.js')
         script(src='js/plugins.min.js')
         script(src='js/main.min.js')
+        
+
+        
+        
+
 

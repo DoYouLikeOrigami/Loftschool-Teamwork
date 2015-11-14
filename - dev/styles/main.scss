@@ -1,38 +1,38 @@
+a,
+input[type="file"],
+input[type="submit"] {
+  cursor: url(/img/cursor.png), pointer;
+}
 
-//@import "compass";
+@import "compass";
+
 
 /* --------- normalize --------- */
 
-//@import "_misc/_normalize";
+@import "_misc/_normalize";
 
 /* --------- fonts --------- */
 
-//@import "_misc/_fonts";
+@import "_misc/_fonts";
 
 /* --------- mixins --------- */
 
-//@import "_misc/_mixins";
+@import "_misc/_mixins";
 
 /* --------- adjustment --------- */
 
-//@import "_misc/_adjustment";
+@import "_misc/_adjustment";
 
 /* --------- plugins --------- */
 
-//@import "_plugins/**/*";
+@import "_plugins/**/*";
 
 /* --------- widgets --------- */
 
-//@import "_widgets/**/*";
+@import "_widgets/**/*";
 
 /* --------- sections --------- */
 
-//@import "_sections/**/*";
+@import "_sections/**/*";
 
-.container {
-	display: block;
-	width: 500px;
-	height: 400px;
-	border: 2px dashed black;
-}
 
