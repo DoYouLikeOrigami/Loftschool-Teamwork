@@ -1,8 +1,12 @@
-
-.main__content{
-    position: relative;
+.main__content {
+  width: 650px;
+  height: 535px;
+  background: url('../img/preview.jpg') no-repeat center center;
+  position: relative;
     overflow: hidden;
 }
+
+
 .wrapper__img {
     // position: relative;
     // height: 100%;
