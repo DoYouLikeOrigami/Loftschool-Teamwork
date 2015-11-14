@@ -86,8 +86,8 @@ var team9WatermarkGeneratorModule = (function () {
                      // получаем  цифры размера изображения
                     var width = $(this).width(),
                         height = $(this).height(),
-                        sizeHeight = WtmWrapper.height(),
-                        sizeWidth = WtmWrapper.width(),
+                        sizeHeight =  $('.main__content').height(),
+                        sizeWidth =  $('.main__content').width(),
                         sizeBox = sizeWidth / sizeHeight,
                         setResize = function (cssResize, heightR, widthR) {
                         imgWtm.addClass(cssResize);
