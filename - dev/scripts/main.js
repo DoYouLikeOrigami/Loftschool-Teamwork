@@ -34,7 +34,7 @@ var team9WatermarkGeneratorModule = (function () {
                 img.attr('src', uploadImg.url);
                 img.addClass('img-upload');
                 img.fadeIn('.wrapper__img-resize');
-                img.appendTo('.wrapper__img-resize');
+                $('.wrapper__img-resize').html(img);
                 img.load(function () {
                         // получаем  цифры размера изображения из дополнительных классов
                         var width = $(this).width(),
