@@ -12,7 +12,7 @@ var team9WatermarkGeneratorModule = (function () {
             $(".img-watermark").remove(); // удаляем ватермарк
             $(".sidebar__form-input").val(''); //чистим инпуты
             $('.wrapper__img-resize').removeAttr('style');//очищаем у оберток дата-атрибуты
-            $('.watermark__img-wrap').removeAttr('style');
+            $('.watermark__img-wrapper').removeAttr('style');
 
 
         });
