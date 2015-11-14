@@ -5,10 +5,18 @@ var team9WatermarkGeneratorModule = (function () {
   var init = function () {
     _setUpListners();
   };
-
   var _setUpListners = function () {
+    // очищение по кнопке сброс
+        $(".btn_reset").on('click', function () {
+            $(".img-upload").remove(); // удаляем фоновое изображение
+            $(".img-watermark").remove(); // удаляем ватермарк
+            $(".sidebar__form-input").val(''); //чистим инпуты
+            $('.wrapper__img-resize').removeAttr('style');//очищаем у оберток дата-атрибуты
+            $('.watermark__img-wrap').removeAttr('style');
 
-          // событие отправки изображения на сервер
+
+        });
+    // событие отправки изображения на сервер
         $('#main-file').fileupload({
             dataType: 'json',
             acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
@@ -20,16 +28,9 @@ var team9WatermarkGeneratorModule = (function () {
                 data.submit();
             },
             done: function(e, data) {
-                 var  uploadImg = data.result.files[0];
-                 if ($('.wrapрer__img').length > 0) {
-                        $('.img-upload').remove();
-                    } else {
-                        // создаем обертку для изображения
-                        // $(".main__content").html("<div class='wrapper__img'></div>");
-                        // $(".wrapper__img").html("<div class='wrapper__img-resize'></div>");
-                    }
+                 var  uploadImg = data.result.files[0],
+                      img = $('<img></img>');
                 // создаем наше изображения(загружаем его на сервер)
-                var img = $('<img></img>');
                 img.attr('src', uploadImg.url);
                 img.addClass('img-upload');
                 img.fadeIn('.wrapper__img-resize');
@@ -60,40 +61,37 @@ var team9WatermarkGeneratorModule = (function () {
             });
         }
     });
+     
    //событие отправки вотермарка на сервер
-
      $('#water-file').fileupload({
             dataType: 'json',
             acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
             disableImageResize: /Android(?!.*Chrome)|Opera/
-                .test(window.navigator && navigator.userAgent),
+            .test(window.navigator && navigator.userAgent),
               url: 'server/php/',
             add: function (e, data) { // отправляем картинку на сервер
                 data.submit();
             },
             done: function (e, data) {
-                var uploadWtm = data.result.files[0];
-                    var wrapper = $(".watermark__img-wrapper");
-                // $(".wrapper__img-resize").append("<div class='watermark__img-wrapper'></div>");
-                
-                    var imgWtm = $('<img></img>');
-                        imgWtm.attr('src', uploadWtm.url);
-                        imgWtm.addClass('img-watermark');
-                        imgWtm.fadeIn('.watermark__img-wrapper');
-
-
-                $(".watermark__img-wrapper").html(imgWtm);
-                 imgWtm.load(function () {
+                var uploadWtm = data.result.files[0],
+                    WtmWrapper = $(".watermark__img-wrapper"),
+                    imgWtm = $('<img></img>');
+                    
+                    imgWtm.attr('src', uploadWtm.url);
+                    imgWtm.addClass('img-watermark');
+                    imgWtm.fadeIn('.watermark__img-wrapper');
+                    WtmWrapper.html(imgWtm);
+                    imgWtm.load(function () {
                     
                      // получаем  цифры размера изображения
                     var width = $(this).width(),
                         height = $(this).height(),
-                        sizeHeight = $('.watermark__img-wrapper').height(),
-                        sizeWidth = $('.watermark__img-wrapper').width(),
+                        sizeHeight = WtmWrapper.height(),
+                        sizeWidth = WtmWrapper.width(),
                         sizeBox = sizeWidth / sizeHeight,
                         setResize = function (cssResize, heightR, widthR) {
                         imgWtm.addClass(cssResize);
-                        $('.watermark__img-wrapper').css({
+                        WtmWrapper.css({
                             'height': heightR + 'px',
                             'width': widthR + 'px'
                         });
