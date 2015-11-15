@@ -25,6 +25,7 @@
 
       &:first-of-type {
         z-index: -1000;
+        display: none;
       }
 
       &:hover {

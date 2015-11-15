@@ -2,7 +2,7 @@
 
 var team9WatermarkGeneratorModule = (function () {
 
-  var 
+  var
     block = $('.watermark__img-wrapper'), //Блок, который будем двигать
     wrapper = $('.wrapper__img-resize'), //Оболочка блока
     leftPos = parseInt(block.css('left').slice(0, -2)),
@@ -46,6 +46,9 @@ var team9WatermarkGeneratorModule = (function () {
 
       add: function(e, data) {
           data.submit();
+          $('#water-file').attr('disabled', false);
+          $('.sidebar__form-label_file').removeClass('ui-state-disabled');
+          $('#water-text').removeClass('ui-state-disabled');
       },
 
       done: function(e, data) {
@@ -74,7 +77,7 @@ var team9WatermarkGeneratorModule = (function () {
                         'margin-top' : - heightR / 2
                     });
                 };
-                 
+
             // и масштабируем его добавочным классом
             if ((width < sizeWidth) && (height < sizeHeight)) {
                 setResize('', height, width);
@@ -100,6 +103,12 @@ var team9WatermarkGeneratorModule = (function () {
 
       add: function (e, data) { // отправляем картинку на сервер
           data.submit();
+          $('input').attr('disabled', false);
+          $('.choose').removeClass('ui-state-disabled');
+          $('.btn').removeClass('ui-state-disabled');
+          $('.move__input').removeClass('ui-state-disabled');
+          $('.arrow__controls').removeClass('ui-state-disabled');
+          _sliderWidgetOn();
       },
 
       done: function (e, data) {
@@ -107,7 +116,7 @@ var team9WatermarkGeneratorModule = (function () {
         var uploadWtm = data.result.files[0],
             WtmWrapper = $(".watermark__img-wrapper"),
             imgWtm = $('<img></img>');
-            
+
             imgWtm.attr('src', uploadWtm.url);
             imgWtm.addClass('img-watermark');
             imgWtm.fadeIn('.watermark__img-wrapper');
@@ -164,6 +173,20 @@ var team9WatermarkGeneratorModule = (function () {
     $(".img-watermark").remove(); // удаляем ватермарк
     $('.wrapper__img-resize').removeAttr('style');//очищаем у оберток дата-атрибуты
     $('.watermark__img-wrapper').removeAttr('style');
+    _sliderWidget();
+    $('#main-text').val("");
+    $('#main-file').val("");
+    $('#water-text').val("");
+    $('#water-file').val("");
+    $('#water-text').attr('disabled', true);
+    $('#water-text').addClass('ui-state-disabled');
+    $('#water-file').attr('disabled', true);
+    $('#water-file-label').addClass('ui-state-disabled');
+    $('.choose').addClass('ui-state-disabled');
+    $('.choose__input').attr('disabled', true);
+    $('.btn_submit').addClass('ui-state-disabled');
+    $('.move__input').addClass('ui-state-disabled');
+    $('.arrow__controls').addClass('ui-state-disabled');
     document.getElementsByClassName('ui-slider-handle')[1].style.left = '100%';
     document.getElementsByClassName('ui-slider-range')[0].style.width = '100%';
     var radio = document.getElementsByClassName('choose__input');
@@ -179,9 +202,16 @@ var team9WatermarkGeneratorModule = (function () {
     block.css({'opacity': '1'});
   };
 
+  var _sliderWidgetOn = function () {
+    $('.slider').slider({
+        disabled: false
+      });
+  }
+
   var _sliderWidget = function () {
       $('.slider').slider({
         range: true,
+        disabled: true,
         min: parseInt($('.slider').data('min')),
         max: parseInt($('.slider').data('max')),
         step: 0.01,
@@ -196,7 +226,7 @@ var team9WatermarkGeneratorModule = (function () {
       sliderHandle[1].onmousedown = function() {
         var Interval;
 
-        Interval = window.setInterval(function() { 
+        Interval = window.setInterval(function() {
             rangeWidth = sliderRange[0].style.width.slice(0, -1) / 100;
             block.css({'opacity' : rangeWidth});
           }, 50);
@@ -234,12 +264,12 @@ var team9WatermarkGeneratorModule = (function () {
 
     var control = $(this),
       coord = control.data('coord'), //x или y
-      value = parseInt(control.val()); 
+      value = parseInt(control.val());
       if (isNaN(value)) value = 0;
       control.val(value);
 
     if (coord === 'x') {
-      if (value < 0) { 
+      if (value < 0) {
         control.val(0);
       } else
 
@@ -251,10 +281,10 @@ var team9WatermarkGeneratorModule = (function () {
       leftPos = parseInt(value);
       block.css({'left': leftPos + 'px'});
 
-    } 
+    }
 
     if (coord === 'y') {
-      if (value < 0) { 
+      if (value < 0) {
         control.val(0);
       } else
 
@@ -266,7 +296,7 @@ var team9WatermarkGeneratorModule = (function () {
       topPos = parseInt(value);
       block.css({'top': topPos + 'px'});
 
-    } 
+    }
   };
 
   var _gridMove = function (e) {
@@ -351,8 +381,8 @@ var team9WatermarkGeneratorModule = (function () {
       controls[i].onmousedown = function(e) {
         e.preventDefault();
         var button = $(this);
-        pressTimer = window.setTimeout(function() { 
-          pressInterval = window.setInterval(function() { 
+        pressTimer = window.setTimeout(function() {
+          pressInterval = window.setInterval(function() {
             _move(button);
           }, 20);
         }, 375);

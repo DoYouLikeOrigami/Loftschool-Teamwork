@@ -11,39 +11,39 @@ sidebar.sidebar
               input(name="" type="file" id="main-file").sidebar__form-input_file
         label.sidebar__label Водяной знак
           .sidebar__form-label-wrapper
-            input(name="" type="text" readonly id="water-text").sidebar__form-input
-            label.sidebar__form-label_file
-              input(name="" type="file" id="water-file" data-url="server/php/" ).sidebar__form-input_file
+            input(name="" type="text" readonly id="water-text").sidebar__form-input.ui-state-disabled
+            label(id="water-file-label").sidebar__form-label_file.ui-state-disabled
+              input(name="" type="file" id="water-file" data-url="server/php/" disabled).sidebar__form-input_file
     li.sidebar__item
       form.sidebar__form
         .sidebar__lable Положение
         .sidebar__form-label-wrapper
           .sidebar__form-label-wrapper_position
               - for (var i = 1; i < 10; i++)
-                label.choose
-                  input(class="choose__input choose__input_" + i, name="radio", type="radio", value="position").choose__input
+                label.choose.ui-state-disabled
+                  input(class="choose__input choose__input_" + i, name="radio", type="radio", value="position" disabled).choose__input
                   div(class="choose__style choose__style_" + i, data-x= (i % 3 > 0) ? i % 3 : 3, data-y= Math.floor((i - 1) / 3 + 1) ).choose__style
           .sidebar__form-label-wrapper_move
             .move__wrapper_top
               label.move__label.move__label_X X
-                input(name="" type="text" data-coord="x" value="0").move__input.boxBlock__controls-input-left
-                a(data-coord="x", data-step="+1").arrow_top.arrow__controls
-                a(data-coord="x", data-step="-1").arrow_bot.arrow__controls
+                input(name="" type="text" data-coord="x" value="0").move__input.boxBlock__controls-input-left.ui-state-disabled
+                a(data-coord="x", data-step="+1").arrow_top.arrow__controls.ui-state-disabled
+                a(data-coord="x", data-step="-1").arrow_bot.arrow__controls.ui-state-disabled
             .move__wrapper_bottom
               label.move__label.move__label_Y Y
-                input(name="" type="text" data-coord="y" value="0").move__input.boxBlock__controls-input-top
-                a(href="#", data-coord="y", data-step="+1").arrow_top.arrow__controls
-                a(href="#", data-coord="y", data-step="-1").arrow_bot.arrow__controls
+                input(name="" type="text" data-coord="y" value="0").move__input.boxBlock__controls-input-top.ui-state-disabled
+                a(href="#", data-coord="y", data-step="+1").arrow_top.arrow__controls.ui-state-disabled
+                a(href="#", data-coord="y", data-step="-1").arrow_bot.arrow__controls.ui-state-disabled
     li.sidebar__item
       form.sidebar__form
         .sidebar__lable Прозрачность
         .sidebar__form-label-wrapper
-          div(class="slider" data-min="0" data-max="1")
+          div(class="slider" data-min="0" data-max="1" disabled)
     li.sidevar__item
       form.sidebar__form
         .sidebar__form-label-wrapper_btns
           input(name="" type="reset" class="btn btn_reset" value="Сброс")
-          input(name="" type="submit" class="btn btn_submit" value="Скачать")
+          input(name="" type="submit" class="btn btn_submit" value="Скачать" disabled).ui-state-disabled
 
 
 
