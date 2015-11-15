@@ -42,3 +42,4 @@ Thumbs.db
 bower.json
 .idea
 /dist/server/php/files
+!/dist/server/php/files/out/.htaccess
