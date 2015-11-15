@@ -143,7 +143,7 @@ var team9WatermarkGeneratorModule = (function () {
 
               // и масштабируем его добавочным классом
               if ((width < sizeWidth) && (height < sizeHeight)) {
-                  setResize('', height, width);
+                  setResize('', height, width, koef);
               } else if (sizeBox < width / height) {
                   setResize('img-upload-widthR ', Math.round(sizeWidth * height / width), sizeWidth, koef);
                   // WtmWrapper.css({
@@ -443,52 +443,3 @@ var team9WatermarkGeneratorModule = (function () {
 })();
 
 team9WatermarkGeneratorModule.init();
-
-var DownloadWatermark = (function () {
-
-  var _setUpListners = function () {
-      $( ".btn_submit" ).on( 'click', _downLoad );
-  };
-
-  var _downLoad = function(e){
-    _sendData();
-  };
-
-  var _sendData = function(){
-    var param = _getParam();
-
-    $.ajax({
-      type: "POST",
-      data: param,
-      url: "server/php/downloads.php",
-      dataType: "json",
-      async: false,
-      success: function(data){
-        // Force file download (whether supported by server).
-        var query = '?download';
-        $( '.btn_submit' ).attr('href','server/php/files/out/' + data.name + query);
-      }
-    });
-
-  };
-
-  var _getParam = function(){
-    return {
-      mainImage: $( '#main-text' ).val(),
-      watermark: $( '#water-text' ).val(),
-      coordX:    $( '.boxBlock__controls-input-left' ).val(),
-      coordY:    $( '.boxBlock__controls-input-top' ).val(),
-      opacity:   $( '.watermark__img-wrapper').css('opacity')
-    }
-
-  };
-
-  return {
-    init: function () {
-      _setUpListners();
-    }
-  };
-
-})();
-
-DownloadWatermark.init();

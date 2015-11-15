@@ -290,7 +290,6 @@ $arrows-map: sprite-map('arrows/*.png', $spacing: 50px);
   width: 100px;
   color: #ffffff;
   font-size: 18px;
-  font-weight: normal;
   line-height: 42px;
   @include border-radius(5px);
   outline: none;
@@ -304,4 +303,7 @@ $arrows-map: sprite-map('arrows/*.png', $spacing: 50px);
 .btn_submit {
   float: right;
   background: #f97e76;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
 }
