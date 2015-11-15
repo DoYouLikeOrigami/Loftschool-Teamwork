@@ -81,8 +81,10 @@ button,
 input,
 select,
 textarea {
-	font-family: sans-serif;
+  font-family: "Roboto", "Segoe UI";
+  font-weight: 600;
 }
+// }
 
 /**
  * Address margins handled incorrectly in IE 6/7.
