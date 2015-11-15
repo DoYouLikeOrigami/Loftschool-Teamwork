@@ -88,8 +88,6 @@ var team9WatermarkGeneratorModule = (function () {
           });
       }
     });
-    }
-  });
   };
 
   var _watermarkUpload = function() {
