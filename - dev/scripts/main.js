@@ -151,6 +151,11 @@ var team9WatermarkGeneratorModule = (function () {
     bottomEdge = wrapHeight - blockHeight;
     leftPos = 0;
     topPos = 0;
+    leftInput.val(leftPos);
+    block.css({'left': leftPos + 'px'});
+    topInput.val(topPos);
+    block.css({'top': topPos + 'px'});
+    console.log(document.getElementsByClassName('choose__input')[0]);
     document.getElementsByClassName('choose__input')[0].checked = true;
   };
 
