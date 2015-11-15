@@ -1,3 +1,5 @@
+$handle-map: sprite-map('handle/*.png', $spacing: 50px);
+
 .ui-slider-horizontal {
   height: 3px;
   background: #dbe1e8;
@@ -11,9 +13,6 @@
   .ui-widget-header {
     background: #9eb2c0;
   }
-
-
-  $handle-map: sprite-map('handle/*.png', $spacing: 50px);
 
   .ui-slider-handle {
     @include get-sprite($handle-map, slider_handle);
@@ -31,5 +30,15 @@
       &:hover {
         @include get-sprite($handle-map, slider_handle_hover);
       }
+  }
+}
+
+.ui-state-disabled {
+  .ui-slider-handle {
+    cursor: default !important;
+
+    &:hover {
+      @include get-sprite($handle-map, slider_handle);
+    }
   }
 }

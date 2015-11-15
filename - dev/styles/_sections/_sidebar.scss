@@ -210,15 +210,17 @@ $arrows-map: sprite-map('arrows/*.png', $spacing: 50px);
     top: 52px;
     right: 20px;
     cursor: url(/img/cursor.png), pointer;
-
-  &:hover{
-    @include get-sprite($arrows-map, up_hover);
-    position: absolute;
-    top: 52px;
-    right: 20px;
-    cursor: url(/img/cursor.png), pointer;
   }
-}
+
+  .arrow_top_hover {
+    &:hover{
+      @include get-sprite($arrows-map, up_hover);
+      position: absolute;
+      top: 52px;
+      right: 20px;
+      cursor: url(/img/cursor.png), pointer;
+    }
+  }
 
   .arrow_bot {
     @include get-sprite($arrows-map, down);
@@ -226,7 +228,9 @@ $arrows-map: sprite-map('arrows/*.png', $spacing: 50px);
     top: 78px;
     right: 20px;
     cursor: url(/img/cursor.png), pointer;
+  }
 
+  .arrow_bot_hover {
     &:hover {
       @include get-sprite($arrows-map, down_hover);
       position: absolute;
@@ -244,7 +248,9 @@ $arrows-map: sprite-map('arrows/*.png', $spacing: 50px);
     top: 107px;
     right: 20px;
     cursor: url(/img/cursor.png), pointer;
+  }
 
+  .arrow_top_hover {
     &:hover{
       @include get-sprite($arrows-map, up_hover);
       position: absolute;
@@ -260,7 +266,9 @@ $arrows-map: sprite-map('arrows/*.png', $spacing: 50px);
     top: 133px;
     right: 20px;
     cursor: url(/img/cursor.png), pointer;
+  }
 
+  .arrow_bot_hover {
     &:hover {
       @include get-sprite($arrows-map, down_hover);
       position: absolute;

@@ -11,6 +11,7 @@ var team9WatermarkGeneratorModule = (function () {
     topInput = $('.boxBlock__controls-input-top'),
     coordInputs = $('.move__input'),
     gridControls = $('.choose__style'),
+    koef = 0.8,
     blockWidth = 0,
     blockHeight = 0,
     wrapWidth = 0,
@@ -83,8 +84,10 @@ var team9WatermarkGeneratorModule = (function () {
                 setResize('', height, width);
             } else if (sizeBox < width / height) {
                 setResize('img-upload-widthR ', Math.round(sizeWidth * height / width), sizeWidth);
+                koef = sizeWidth / width;
             } else {
                 setResize('img-upload-heightR ', sizeHeight, Math.round(sizeHeight * width / height));
+                koef = sizeHeight / height;
             }
 
             _setVars();
@@ -108,6 +111,8 @@ var team9WatermarkGeneratorModule = (function () {
           $('.btn').removeClass('ui-state-disabled');
           $('.move__input').removeClass('ui-state-disabled');
           $('.arrow__controls').removeClass('ui-state-disabled');
+          $('.arrow_top').addClass('arrow_top_hover');
+          $('.arrow_bot').addClass('arrow_bot_hover');
           _sliderWidgetOn();
       },
 
@@ -125,14 +130,14 @@ var team9WatermarkGeneratorModule = (function () {
               // получаем  цифры размера изображения
               var width = $(this).width(),
                   height = $(this).height(),
-                  sizeHeight =  $('.main__content').height(),
-                  sizeWidth =  $('.main__content').width(),
+                  sizeHeight =  $('.wrapper__img-resize').height(),
+                  sizeWidth =  $('.wrapper__img-resize').width(),
                   sizeBox = sizeWidth / sizeHeight,
-                  setResize = function (cssResize, heightR, widthR) {
+                  setResize = function (cssResize, heightR, widthR, koef) {
                     imgWtm.addClass(cssResize);
                     WtmWrapper.css({
-                      'height': heightR + 'px',
-                      'width': widthR + 'px'
+                      'height': Math.round(heightR * koef) + 'px',
+                      'width':  Math.round(widthR * koef)+ 'px'
                     });
                   };
 
@@ -140,9 +145,17 @@ var team9WatermarkGeneratorModule = (function () {
               if ((width < sizeWidth) && (height < sizeHeight)) {
                   setResize('', height, width);
               } else if (sizeBox < width / height) {
-                  setResize('img-upload-widthR ', Math.round(sizeWidth * height / width), sizeWidth);
+                  setResize('img-upload-widthR ', Math.round(sizeWidth * height / width), sizeWidth, koef);
+                  // WtmWrapper.css({
+                  //   'height': Math.round(height * koef) + 'px',
+                  //   'width':  Math.round(width * koef )+ 'px'
+                  // });
               } else {
-                  setResize('img-upload-heightR ', sizeHeight, Math.round(sizeHeight * width / height));
+                  setResize('img-upload-heightR ', sizeHeight, Math.round(sizeHeight * width / height), koef);
+                  // WtmWrapper.css({
+                  //   'height': Math.round(height * koef) + 'px',
+                  //   'width':  Math.round(width * koef )+ 'px'
+                  // });
               }
 
               _setVars();
@@ -187,6 +200,8 @@ var team9WatermarkGeneratorModule = (function () {
     $('.btn_submit').addClass('ui-state-disabled');
     $('.move__input').addClass('ui-state-disabled');
     $('.arrow__controls').addClass('ui-state-disabled');
+    $('.arrow_top').removeClass('arrow_top_hover');
+    $('.arrow_bot').removeClass('arrow_bot_hover');
     document.getElementsByClassName('ui-slider-handle')[1].style.left = '100%';
     document.getElementsByClassName('ui-slider-range')[0].style.width = '100%';
     var radio = document.getElementsByClassName('choose__input');
