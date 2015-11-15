@@ -198,18 +198,18 @@
   text-align: center;
 }
 
-$arrows-map: sprite-map('arrows/*.png', $spacing: 50px);
+// $arrows-map: sprite-map('arrows/*.png', $spacing: 50px);
 
 .move__label_X {
   .arrow_top {
-    @include get-sprite($arrows-map, up);
+   // @include get-sprite($arrows-map, up);
     position: absolute;
     top: 52px;
     right: 20px;
     cursor: url(/img/cursor.png), pointer;
 
   &:hover{
-    @include get-sprite($arrows-map, up_hover);
+   // @include get-sprite($arrows-map, up_hover);
     position: absolute;
     top: 52px;
     right: 20px;
@@ -218,14 +218,14 @@ $arrows-map: sprite-map('arrows/*.png', $spacing: 50px);
 }
 
   .arrow_bot {
-    @include get-sprite($arrows-map, down);
+   // @include get-sprite($arrows-map, down);
     position: absolute;
     top: 78px;
     right: 20px;
     cursor: url(/img/cursor.png), pointer;
 
     &:hover {
-      @include get-sprite($arrows-map, down_hover);
+     // @include get-sprite($arrows-map, down_hover);
       position: absolute;
       top: 78px;
       right: 20px;
@@ -236,14 +236,14 @@ $arrows-map: sprite-map('arrows/*.png', $spacing: 50px);
 
 .move__label_Y {
   .arrow_top {
-    @include get-sprite($arrows-map, up);
+  //  @include get-sprite($arrows-map, up);
     position: absolute;
     top: 107px;
     right: 20px;
     cursor: url(/img/cursor.png), pointer;
 
     &:hover{
-      @include get-sprite($arrows-map, up_hover);
+    //  @include get-sprite($arrows-map, up_hover);
       position: absolute;
       top: 107px;
       right: 20px;
@@ -252,14 +252,14 @@ $arrows-map: sprite-map('arrows/*.png', $spacing: 50px);
   }
 
   .arrow_bot {
-    @include get-sprite($arrows-map, down);
+   // @include get-sprite($arrows-map, down);
     position: absolute;
     top: 133px;
     right: 20px;
     cursor: url(/img/cursor.png), pointer;
 
     &:hover {
-      @include get-sprite($arrows-map, down_hover);
+     // @include get-sprite($arrows-map, down_hover);
       position: absolute;
       top: 133px;
       right: 20px;

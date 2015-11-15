@@ -2,15 +2,42 @@
 
 var team9WatermarkGeneratorModule = (function () {
 
+  var 
+    block = $('.watermark__img-wrapper'), //Блок, который будем двигать
+    wrapper = $('.wrapper__img-resize'), //Оболочка блока
+    leftPos = parseInt(block.css('left').slice(0, -2)),
+    topPos = parseInt(block.css('top').slice(0, -2)),
+    leftInput = $('.boxBlock__controls-input-left'),
+    topInput = $('.boxBlock__controls-input-top'),
+    coordInputs = $('.move__input'),
+    gridControls = $('.choose__style'),
+    blockWidth = 0,
+    blockHeight = 0,
+    wrapWidth = 0,
+    wrapHeight = 0,
+    rightEdge = wrapWidth - blockWidth,
+    bottomEdge = wrapHeight - blockHeight;
+
   var _setUpListners = function () {
     // очищение по кнопке сброс
     $(".btn_reset").on('click', _resetWidget);
     $('#main-file').on('change', _addTextToMainInput);
     $('#water-file').on('change', _addTextToWaterInput);
+    coordInputs.on('change', _inputMove);
+    gridControls.on('click', _gridMove);
+  };
 
-    
-    // событие отправки изображения на сервер
-    $('#main-file').fileupload({
+  var _defaultRun = function () {
+    _dragMove();
+    _arrowsMove();
+    _imageUpload();
+    _watermarkUpload();
+    if ($('.slider').length) _sliderWidget();
+  };
+
+  var _imageUpload = function() {
+
+    $('#main-file').fileupload(
       dataType: 'json',
       acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
       disableImageResize: /Android(?!.*Chrome)|Opera/
@@ -22,42 +49,50 @@ var team9WatermarkGeneratorModule = (function () {
       },
 
       done: function(e, data) {
-        var uploadImg = data.result.files[0],
-            img = $('<img></img>');
-        // создаем наше изображения(загружаем его на сервер)
-        img.attr('src', uploadImg.url);
-        img.addClass('img-upload');
-        img.fadeIn('.wrapper__img-resize');
-        $('.wrapper__img-resize').html(img);
-        img.load(function () {
-          // получаем  цифры размера изображения из дополнительных классов
-          var width = $(this).width(),
-              height = $(this).height(),
-              sizeHeight = $('.main__content').height(),
-              sizeWidth = $('.main__content').width(),
-              sizeBox = sizeWidth / sizeHeight,
-              setResize = function (cssResize, heightR, widthR) {
-                img.addClass(cssResize);
-                $('.wrapper__img-resize').css({
-                  'height': heightR + 'px',
-                  'width': widthR + 'px',
-                  'margin-top' : - heightR / 2
-                });
-              };
-               
-          // и масштабируем его добавочным классом
-          if ((width < sizeWidth) && (height < sizeHeight)) {
-            setResize('', height, width);
-          } else if (sizeBox < width / height) {
-            setResize('img-upload-widthR ', Math.round(sizeWidth * height / width), sizeWidth);
-          } else {
-            setResize('img-upload-heightR ', sizeHeight, Math.round(sizeHeight * width / height));
-          }
-        });
+           var  uploadImg = data.result.files[0],
+                img = $('<img></img>');
+
+          // создаем наше изображения(загружаем его на сервер)
+          $('.img-upload').remove();
+          img.attr('src', uploadImg.url);
+          img.addClass('img-upload');
+          img.fadeIn('.wrapper__img-resize');
+          $('.wrapper__img-resize').append(img);
+
+          img.load(function () {
+            // получаем  цифры размера изображения из дополнительных классов
+            var width = $(this).width(),
+                height = $(this).height(),
+                sizeHeight = $('.main__content').height(),
+                sizeWidth = $('.main__content').width(),
+                sizeBox = sizeWidth / sizeHeight,
+                setResize = function (cssResize, heightR, widthR) {
+                    img.addClass(cssResize);
+                    $('.wrapper__img-resize').css({
+                        'height': heightR + 'px',
+                        'width': widthR + 'px',
+                        'margin-top' : - heightR / 2
+                    });
+                };
+                 
+            // и масштабируем его добавочным классом
+            if ((width < sizeWidth) && (height < sizeHeight)) {
+                setResize('', height, width);
+            } else if (sizeBox < width / height) {
+                setResize('img-upload-widthR ', Math.round(sizeWidth * height / width), sizeWidth);
+            } else {
+                setResize('img-upload-heightR ', sizeHeight, Math.round(sizeHeight * width / height));
+            }
+
+            _setVars();
+          });
       }
     });
-     
-   //событие отправки вотермарка на сервер
+    }
+  });
+  };
+
+  var _watermarkUpload = function() {
     $('#water-file').fileupload({
       dataType: 'json',
       acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
@@ -92,6 +127,7 @@ var team9WatermarkGeneratorModule = (function () {
                       'width': widthR + 'px'
                     });
                   };
+
               // и масштабируем его добавочным классом
               if ((width < sizeWidth) && (height < sizeHeight)) {
                   setResize('', height, width);
@@ -100,13 +136,20 @@ var team9WatermarkGeneratorModule = (function () {
               } else {
                   setResize('img-upload-heightR ', sizeHeight, Math.round(sizeHeight * width / height));
               }
+
+              _setVars();
             });
       }
     });
   };
 
-  var _defaultRun = function () {
-    if ($('.slider').length) _sliderWidget();
+  var _setVars = function() {
+    blockWidth = parseInt(block.css('width').slice(0, -2)),
+    blockHeight = parseInt(block.css('height').slice(0, -2)),
+    wrapWidth = parseInt(wrapper.css('width').slice(0, -2)),
+    wrapHeight = parseInt(wrapper.css('height').slice(0, -2)),
+    rightEdge = wrapWidth - blockWidth,
+    bottomEdge = wrapHeight - blockHeight;
   };
 
   var _resetWidget = function() {
@@ -120,6 +163,13 @@ var team9WatermarkGeneratorModule = (function () {
     for (var i = 0; i < radio.length; i++) {
       radio[i].checked = false;
     }
+    leftPos = 0;
+    topPos = 0;
+    leftInput.val(leftPos);
+    topInput.val(topPos);
+    block.css({'left': leftPos + 'px'});
+    block.css({'top': topPos + 'px'});
+    block.css({'opacity': '1'});
   };
 
   var _sliderWidget = function () {
@@ -158,9 +208,6 @@ var team9WatermarkGeneratorModule = (function () {
   var _addTextToMainInput = function(e) {
     e.preventDefault();
 
-    //console.log($(this));
-
-
     var input = $(this),
         name = input.val()
 
@@ -170,50 +217,12 @@ var team9WatermarkGeneratorModule = (function () {
   var _addTextToWaterInput = function(e) {
     e.preventDefault();
 
-    console.log($(this));
-
-
     var input = $(this),
         name = input.val()
 
     $('#water-text').val(name.replace(/C:\\fakepath\\/, ""));
   };
 
-  return {
-    init: function () {
-      _setUpListners();
-      _defaultRun();
-    }
-  };
-
-})();
-
-var blockMoveWidget = ( function () {
-
-  var 
-    block = $('.watermark__img-wrapper'), //Блок, который будем двигать
-    blockWidth = parseInt(block.css('width').slice(0, -2)),
-    blockHeight = parseInt(block.css('height').slice(0, -2)),
-    wrapper = $('.wrapper__img-resize'), //Оболочка блока
-    wrapWidth = parseInt(wrapper.css('width').slice(0, -2)),
-    wrapHeight = parseInt(wrapper.css('height').slice(0, -2)),
-    leftPos = parseInt(block.css('left').slice(0, -2)),
-    topPos = parseInt(block.css('top').slice(0, -2)),
-    leftInput = $('.boxBlock__controls-input-left'),
-    topInput = $('.boxBlock__controls-input-top'),
-    coordInputs = $('.move__input'),
-    gridControls = $('.choose__style'),
-    rightEdge = wrapWidth - blockWidth,
-    bottomEdge = wrapHeight - blockHeight;
-    
-  var _setUpListeners = function () {
-    $(".btn_reset").on('click', _resetValues);
-    coordInputs.on('change', _inputMove);
-    gridControls.on('click', _gridMove);
-    _dragMove();
-    _arrowsMove();
-  };
-  
   var _inputMove = function (e) {
 
     var control = $(this),
@@ -251,7 +260,7 @@ var blockMoveWidget = ( function () {
       block.css({'top': topPos + 'px'});
 
     } 
-  }
+  };
 
   var _gridMove = function (e) {
 
@@ -270,7 +279,7 @@ var blockMoveWidget = ( function () {
     block.css({'left': leftPos + 'px'});
     topInput.val(topPos);
     block.css({'top': topPos + 'px'});
-  }
+  };
 
   var _dragMove = function () {
     var drag = document.getElementById('blockToMove'),
@@ -308,7 +317,7 @@ var blockMoveWidget = ( function () {
     drag.ondragstart = function() {
         return false;
       };
-  }
+  };
 
   function _getCoords(elem) { // кроме IE8-
     var box = elem.getBoundingClientRect();
@@ -317,8 +326,7 @@ var blockMoveWidget = ( function () {
       top: box.top + pageYOffset,
       left: box.left + pageXOffset
     };
-
-  }
+  };
 
   var _arrowsMove = function () {
     var
@@ -350,7 +358,7 @@ var blockMoveWidget = ( function () {
       }
 
     };
-  }
+  };
 
   function _move(control) {
     var coord = control.data('coord'), //x или y
@@ -371,24 +379,15 @@ var blockMoveWidget = ( function () {
         block.css({'top': topPos + 'px'});
       }
     }
-  }
-
-  var _resetValues = function () {
-    leftPos = 0;
-    topPos = 0;
-    leftInput.val(leftPos);
-    topInput.val(topPos);
-    block.css({'left': leftPos + 'px'});
-    block.css({'top': topPos + 'px'});
-    block.css({'opacity': '1'});
-  }
+  };
 
   return {
     init: function () {
-      _setUpListeners();
+      _setUpListners();
+      _defaultRun();
     }
-  }
-}());
+  };
+
+})();
 
 team9WatermarkGeneratorModule.init();
-blockMoveWidget.init();
