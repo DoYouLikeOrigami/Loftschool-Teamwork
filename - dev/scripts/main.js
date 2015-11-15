@@ -37,7 +37,7 @@ var team9WatermarkGeneratorModule = (function () {
 
   var _imageUpload = function() {
 
-    $('#main-file').fileupload(
+    $('#main-file').fileupload({
       dataType: 'json',
       acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
       disableImageResize: /Android(?!.*Chrome)|Opera/
