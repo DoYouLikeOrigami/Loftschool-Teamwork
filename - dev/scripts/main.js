@@ -103,6 +103,7 @@ var team9WatermarkGeneratorModule = (function () {
       },
 
       done: function (e, data) {
+
         var uploadWtm = data.result.files[0],
             WtmWrapper = $(".watermark__img-wrapper"),
             imgWtm = $('<img></img>');
@@ -148,6 +149,9 @@ var team9WatermarkGeneratorModule = (function () {
     wrapHeight = parseInt(wrapper.css('height').slice(0, -2)),
     rightEdge = wrapWidth - blockWidth,
     bottomEdge = wrapHeight - blockHeight;
+    leftPos = 0;
+    topPos = 0;
+    document.getElementsByClassName('choose__input')[0].checked = true;
   };
 
   var _resetWidget = function() {
