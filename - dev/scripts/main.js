@@ -23,11 +23,13 @@ var team9WatermarkGeneratorModule = (function () {
             done: function(e, data) {
                  var  uploadImg = data.result.files[0],
                       img = $('<img></img>');
+                      // string = img + '<div></div>';
                 // создаем наше изображения(загружаем его на сервер)
                 img.attr('src', uploadImg.url);
                 img.addClass('img-upload');
                 img.fadeIn('.wrapper__img-resize');
-                $('.wrapper__img-resize').html(img);
+                // console.log(string)
+                $('.wrapper__img-resize').append(img);
                 img.load(function () {
                         // получаем  цифры размера изображения из дополнительных классов
                         var width = $(this).width(),
