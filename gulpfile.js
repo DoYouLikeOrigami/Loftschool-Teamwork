@@ -7,7 +7,7 @@
 
 var
 	gulp        = require('gulp'),
-	//compass     = require('gulp-compass'),
+	compass     = require('gulp-compass'),
 	jade        = require('gulp-jade'),
 	browserSync = require('browser-sync').create(),
   	gutil       = require('gulp-util'),
@@ -102,7 +102,7 @@ gulp.task('jade', function() {
 });
 
 /* --------- SCSS-COMPASS - compass --------- */
-/*
+
 gulp.task('compass', function() {
 	gulp.src(paths.scss.location)
 		.pipe(plumber())
@@ -113,7 +113,7 @@ gulp.task('compass', function() {
 			image: paths.compass.imgFolder
 		}));
 });
-*/
+
 
 /* --------- PLUGINS - plugins, sctipts --------- */
 
@@ -165,7 +165,7 @@ gulp.task('deploy', function() {
 
 /* --------- DEFAULT - gulp --------- */
 
-gulp.task('default', ['jade', 'plugins', 'scripts', 'sync', 'watch']);
+gulp.task('default', ['jade', 'plugins', 'scripts', 'compass', 'sync', 'watch']);
 
 gulp.task('go-away', ['size'], function () {
     gulp.start('deploy');
