@@ -442,4 +442,52 @@ var team9WatermarkGeneratorModule = (function () {
 
 })();
 
+var DownloadWatermark = (function () {
+
+  var _setUpListners = function () {
+      $( ".btn_submit" ).on( 'click', _downLoad );
+  };
+
+  var _downLoad = function(e){
+    _sendData();
+  };
+
+  var _sendData = function(){
+    var param = _getParam();
+
+    $.ajax({
+      type: "POST",
+      data: param,
+      url: "server/php/downloads.php",
+      dataType: "json",
+      async: false,
+      success: function(data){
+        // Force file download (whether supported by server).
+        var query = '?download';
+        $( '.btn_submit' ).attr('href','server/php/files/out/' + data.name + query);
+      }
+    });
+
+  };
+
+  var _getParam = function(){
+    return {
+      mainImage: $( '#main-text' ).val(),
+      watermark: $( '#water-text' ).val(),
+      coordX:    $( '.boxBlock__controls-input-left' ).val(),
+      coordY:    $( '.boxBlock__controls-input-top' ).val(),
+      opacity:   $( '.watermark__img-wrapper').css('opacity')
+    }
+
+  };
+
+  return {
+    init: function () {
+      _setUpListners();
+    }
+  };
+
+})();
+
+DownloadWatermark.init(); 
 team9WatermarkGeneratorModule.init();

@@ -41,8 +41,6 @@ Thumbs.db
 /bower_components
 bower.json
 .idea
-<<<<<<< HEAD
-/dist/server/php/files
-=======
->>>>>>> 5c980ba3a660c659dd9f3f65fe41c91c886dbf3d
+!/dist/server/php/files
+!/dist/server/php/files/out
 !/dist/server/php/files/out/.htaccess
