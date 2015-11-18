@@ -145,7 +145,7 @@ gulp.task('deploy', function() {
     var conn = ftp.create({
         host: "watermark.roool.ru",
         user: "dist@watermark.roool.ru",
-        password: ".",
+        password: "esbahasebu",
         parallel: 10,
         log: gutil.log
     });
