@@ -108,6 +108,7 @@ var team9WatermarkGeneratorModule = (function () {
               }
             }
 
+            wrapper.data('koef', koef).attr('data-koef', koef);
             _setVars();
           });
       }
