@@ -11,7 +11,7 @@ var team9WatermarkGeneratorModule = (function () {
     topInput = $('.boxBlock__controls-input-top'),
     coordInputs = $('.move__input'),
     gridControls = $('.choose__style'),
-    koef = 0.8,
+    koef = 1,
     blockWidth = 0,
     blockHeight = 0,
     wrapWidth = 0,
@@ -67,9 +67,10 @@ var team9WatermarkGeneratorModule = (function () {
             // получаем  цифры размера изображения из дополнительных классов
             var width = $(this).width(),
                 height = $(this).height(),
-                sizeHeight = $('.main__content').height(),
-                sizeWidth = $('.main__content').width(),
-                sizeBox = sizeWidth / sizeHeight,
+                sizeHeight = $('.main__content').height(), //535px
+                sizeWidth = $('.main__content').width(), //650px
+                sizeBox = sizeWidth / sizeHeight, // коэфициент размера main_content = 1.215
+                //ф-ия добавления размеров обёртки для исходного изображения ".wrapper__img-resize"
                 setResize = function (cssResize, heightR, widthR) {
                     img.addClass(cssResize);
                     $('.wrapper__img-resize').css({
@@ -79,17 +80,35 @@ var team9WatermarkGeneratorModule = (function () {
                     });
                 };
 
-            // и масштабируем его добавочным классом
-            if ((width < sizeWidth) && (height < sizeHeight)) {
+            // условия масштабирования высоты и ширины ".wrapper__img-resize"
+
+            // 1. Исходное < main_content
+            if ((width <= sizeWidth) && (height <= sizeHeight)) {
                 setResize('', height, width);
-            } else if (sizeBox < width / height) {
-                setResize('img-upload-widthR ', Math.round(sizeWidth * height / width), sizeWidth);
+            }
+            // 2. Исходное > main_content
+            else if ((width > sizeWidth) && (height > sizeHeight)) {
+              if (width > height) {
+                setResize('img-upload-both-heightR ', Math.round(height * (sizeWidth / width)), sizeWidth);
                 koef = sizeWidth / width;
-            } else {
-                setResize('img-upload-heightR ', sizeHeight, Math.round(sizeHeight * width / height));
+              } else {
+                setResize('img-upload-both-widthR ', sizeHeight, Math.round(width * (sizeHeight / height)));
                 koef = sizeHeight / height;
+              }
             }
 
+            // 3. Исходное > main_content, но только одна из величин
+            else {
+              if ((width > sizeWidth) && (height < sizeHeight)) {
+                setResize('img-upload-heightR', Math.round(height * (sizeWidth / width)), sizeWidth);
+                koef = sizeWidth / width;
+              } else {
+                setResize('img-upload-widthR ', sizeHeight, Math.round(width * (sizeHeight / height)));
+                koef = sizeHeight / height;
+              }
+            }
+
+            wrapper.data('koef', koef).attr('data-koef', koef);
             _setVars();
           });
       }
@@ -128,34 +147,25 @@ var team9WatermarkGeneratorModule = (function () {
             WtmWrapper.html(imgWtm);
             imgWtm.load(function () {
               // получаем  цифры размера изображения
-              var width = $(this).width(),
-                  height = $(this).height(),
+              var width = $(this)[0].naturalWidth,
+                  height = $(this)[0].naturalHeight,
                   sizeHeight =  $('.wrapper__img-resize').height(),
                   sizeWidth =  $('.wrapper__img-resize').width(),
+                  imageHeight = sizeHeight * (1 / koef),
+                  imageWidth = sizeWidth * (1 / koef),
                   sizeBox = sizeWidth / sizeHeight,
                   setResize = function (cssResize, heightR, widthR, koef) {
                     imgWtm.addClass(cssResize);
                     WtmWrapper.css({
                       'height': Math.round(heightR * koef) + 'px',
-                      'width':  Math.round(widthR * koef)+ 'px'
+                      'width':  Math.round(widthR * koef) + 'px'
                     });
                   };
 
-              // и масштабируем его добавочным классом
-              if ((width < sizeWidth) && (height < sizeHeight)) {
-                  setResize('', height, width, koef);
-              } else if (sizeBox < width / height) {
-                  setResize('img-upload-widthR ', Math.round(sizeWidth * height / width), sizeWidth, koef);
-                  // WtmWrapper.css({
-                  //   'height': Math.round(height * koef) + 'px',
-                  //   'width':  Math.round(width * koef )+ 'px'
-                  // });
+              if ((width < imageWidth) && (height < imageHeight)) {
+                setResize('', height, width, koef);
               } else {
-                  setResize('img-upload-heightR ', sizeHeight, Math.round(sizeHeight * width / height), koef);
-                  // WtmWrapper.css({
-                  //   'height': Math.round(height * koef) + 'px',
-                  //   'width':  Math.round(width * koef )+ 'px'
-                  // });
+                setResize('', height, width, (koef/2));
               }
 
               _setVars();
@@ -177,7 +187,7 @@ var team9WatermarkGeneratorModule = (function () {
     block.css({'left': leftPos + 'px'});
     topInput.val(topPos);
     block.css({'top': topPos + 'px'});
-    console.log(document.getElementsByClassName('choose__input')[0]);
+    // console.log(document.getElementsByClassName('choose__input')[0]);
     document.getElementsByClassName('choose__input')[0].checked = true;
   };
 
@@ -489,5 +499,5 @@ var DownloadWatermark = (function () {
 
 })();
 
-DownloadWatermark.init(); 
+DownloadWatermark.init();
 team9WatermarkGeneratorModule.init();
