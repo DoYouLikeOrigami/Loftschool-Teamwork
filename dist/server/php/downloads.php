@@ -13,14 +13,12 @@ if(isset($_POST)){
     $image         = WideImage::load($main_image);
     $watermark     = WideImage::load($watermark_image)->saveToFile($path_images.$water_name.'.png');
     $watermark_png = WideImage::load($path_images.$water_name.'.png');
-    //$new       = $image->merge($watermark, $data['coordX'], $data['coordY'], $data['opacity']);
 
     $image->merge($watermark_png,
-        $data['coordX'],
-        $data['coordY'],
+        $data['coordX'] / (float)$data['ratio'],
+        $data['coordY'] / (float)$data['ratio'],
         $data['opacity'] * 100)
         ->saveToFile($path_out.$out_filename.'.jpg');
-    //$new = $image->merge($watermark_png, 10, 10, 30)->output('jpg', 100);
 
     echo json_encode(array('name' => $out_filename.'.jpg'));
 }

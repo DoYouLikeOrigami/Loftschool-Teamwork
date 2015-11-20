@@ -464,7 +464,8 @@ var DownloadWatermark = (function () {
       watermark: $( '#water-text' ).val(),
       coordX:    $( '.boxBlock__controls-input-left' ).val(),
       coordY:    $( '.boxBlock__controls-input-top' ).val(),
-      opacity:   $( '.watermark__img-wrapper').css('opacity')
+      opacity:   $( '.watermark__img-wrapper').css('opacity'),
+	  ratio:     $( '.wrapper__img-resize').attr('data-koef')
     }
 
   };
