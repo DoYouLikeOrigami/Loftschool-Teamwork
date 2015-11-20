@@ -1,49 +1,51 @@
 .main__content {
   width: 650px;
   height: 535px;
-  background: url('../img/preview.jpg') no-repeat center center;
+  background: url('../img/preview.png') no-repeat center center;
   position: relative;
-    overflow: hidden;
+  overflow: hidden;
 }
-
 
 
 .wrapper__img-resize {
-    position: absolute;
-    display:block;
-    top:0;
-    bottom: 0;
-    right: 0;
-    left:0;
-    
-    margin: auto;
-
-
+  position: relative;
+  display: block;
+  top: 50%;
+  margin: 0 auto;
 }
 
 .img-upload{
-    position: relative;
-    display:block;
+  position: relative;
+  display:block;
 }
-
 
 .watermark__img-wrapper{
-    position: absolute;
-    top: 8px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
+  position: absolute;
+  z-index: 1;
+  top: 0px;
+  left: 0px;
+  cursor: move;
 }
+
 .img-watermark {
-    position: absolute;
-    display:block;
-
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: block;
 }
+
 .img-upload-widthR {
-    width: 100%;
-
+  height: 100%;
 }
-.img-upload-heightR {
-    height: 100%;
 
+.img-upload-heightR {
+  width: 100%;
+}
+
+.img-upload-both-heightR {
+  width: 100%;
+}
+
+.img-upload-both-widthR {
+  height: 100%;
 }

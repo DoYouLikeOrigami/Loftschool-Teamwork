@@ -61,9 +61,9 @@
 									</label>
 									<label class="sidebar__label">Водяной знак
 										<div class="sidebar__form-label-wrapper">
-											<input name="" type="text" readonly id="water-text" class="sidebar__form-input">
-											<label class="sidebar__form-label_file">
-												<input name="" type="file" id="water-file" data-url="server/php/" class="sidebar__form-input_file">
+											<input name="" type="text" readonly id="water-text" class="sidebar__form-input ui-state-disabled">
+											<label id="water-file-label" class="sidebar__form-label_file ui-state-disabled">
+												<input name="" type="file" id="water-file" data-url="server/php/" disabled class="sidebar__form-input_file">
 											</label>
 										</div>
 									</label>
@@ -74,52 +74,52 @@
 									<div class="sidebar__lable">Положение</div>
 									<div class="sidebar__form-label-wrapper">
 										<div class="sidebar__form-label-wrapper_position">
-											<label class="choose">
-												<input name="radio" type="radio" value="position" class="choose__input choose__input_1 choose__input">
+											<label class="choose ui-state-disabled">
+												<input name="radio" type="radio" value="position" disabled class="choose__input choose__input_1 choose__input">
 												<div data-x='1' data-y='1' class="choose__style choose__style_1 choose__style"></div>
 											</label>
-											<label class="choose">
-												<input name="radio" type="radio" value="position" class="choose__input choose__input_2 choose__input">
+											<label class="choose ui-state-disabled">
+												<input name="radio" type="radio" value="position" disabled class="choose__input choose__input_2 choose__input">
 												<div data-x='2' data-y='1' class="choose__style choose__style_2 choose__style"></div>
 											</label>
-											<label class="choose">
-												<input name="radio" type="radio" value="position" class="choose__input choose__input_3 choose__input">
+											<label class="choose ui-state-disabled">
+												<input name="radio" type="radio" value="position" disabled class="choose__input choose__input_3 choose__input">
 												<div data-x='3' data-y='1' class="choose__style choose__style_3 choose__style"></div>
 											</label>
-											<label class="choose">
-												<input name="radio" type="radio" value="position" class="choose__input choose__input_4 choose__input">
+											<label class="choose ui-state-disabled">
+												<input name="radio" type="radio" value="position" disabled class="choose__input choose__input_4 choose__input">
 												<div data-x='1' data-y='2' class="choose__style choose__style_4 choose__style"></div>
 											</label>
-											<label class="choose">
-												<input name="radio" type="radio" value="position" class="choose__input choose__input_5 choose__input">
+											<label class="choose ui-state-disabled">
+												<input name="radio" type="radio" value="position" disabled class="choose__input choose__input_5 choose__input">
 												<div data-x='2' data-y='2' class="choose__style choose__style_5 choose__style"></div>
 											</label>
-											<label class="choose">
-												<input name="radio" type="radio" value="position" class="choose__input choose__input_6 choose__input">
+											<label class="choose ui-state-disabled">
+												<input name="radio" type="radio" value="position" disabled class="choose__input choose__input_6 choose__input">
 												<div data-x='3' data-y='2' class="choose__style choose__style_6 choose__style"></div>
 											</label>
-											<label class="choose">
-												<input name="radio" type="radio" value="position" class="choose__input choose__input_7 choose__input">
+											<label class="choose ui-state-disabled">
+												<input name="radio" type="radio" value="position" disabled class="choose__input choose__input_7 choose__input">
 												<div data-x='1' data-y='3' class="choose__style choose__style_7 choose__style"></div>
 											</label>
-											<label class="choose">
-												<input name="radio" type="radio" value="position" class="choose__input choose__input_8 choose__input">
+											<label class="choose ui-state-disabled">
+												<input name="radio" type="radio" value="position" disabled class="choose__input choose__input_8 choose__input">
 												<div data-x='2' data-y='3' class="choose__style choose__style_8 choose__style"></div>
 											</label>
-											<label class="choose">
-												<input name="radio" type="radio" value="position" class="choose__input choose__input_9 choose__input">
+											<label class="choose ui-state-disabled">
+												<input name="radio" type="radio" value="position" disabled class="choose__input choose__input_9 choose__input">
 												<div data-x='3' data-y='3' class="choose__style choose__style_9 choose__style"></div>
 											</label>
 										</div>
 										<div class="sidebar__form-label-wrapper_move">
 											<div class="move__wrapper_top">
 												<label class="move__label move__label_X">X
-													<input name="" type="text" data-coord="x" value="0" class="move__input boxBlock__controls-input-left"><a data-coord="x" data-step="+1" class="arrow_top arrow__controls"></a><a data-coord="x" data-step="-1" class="arrow_bot arrow__controls"></a>
+													<input name="" type="text" data-coord="x" value="0" class="move__input boxBlock__controls-input-left ui-state-disabled"><a data-coord="x" data-step="+1" class="arrow_top arrow__controls ui-state-disabled"></a><a data-coord="x" data-step="-1" class="arrow_bot arrow__controls ui-state-disabled"></a>
 												</label>
 											</div>
 											<div class="move__wrapper_bottom">
 												<label class="move__label move__label_Y">Y
-													<input name="" type="text" data-coord="y" value="0" class="move__input boxBlock__controls-input-top"><a href="#" data-coord="y" data-step="+1" class="arrow_top arrow__controls"></a><a href="#" data-coord="y" data-step="-1" class="arrow_bot arrow__controls"></a>
+													<input name="" type="text" data-coord="y" value="0" class="move__input boxBlock__controls-input-top ui-state-disabled"><a href="#" data-coord="y" data-step="+1" class="arrow_top arrow__controls ui-state-disabled"></a><a href="#" data-coord="y" data-step="-1" class="arrow_bot arrow__controls ui-state-disabled"></a>
 												</label>
 											</div>
 										</div>
@@ -130,15 +130,21 @@
 								<form class="sidebar__form">
 									<div class="sidebar__lable">Прозрачность</div>
 									<div class="sidebar__form-label-wrapper">
-										<div data-min="0" data-max="1" class="slider"></div>
+										<div data-min="0" data-max="1" disabled class="slider"></div>
 									</div>
 								</form>
 							</li>
 							<li class="sidevar__item">
 								<form class="sidebar__form">
 									<div class="sidebar__form-label-wrapper_btns">
-										<input name="" type="reset" value="Сброс" class="btn btn_reset">
-										<input name="" type="submit" value="Скачать" class="btn btn_submit">
+										<input name="" type="reset" value="Сброс" class="btn btn_reset"><a href="#" target="_blank" class="btn btn_submit ui-state-disabled">Скачать</a>
+										
+										
+										
+										
+										
+										
+										
 									</div>
 								</form>
 							</li>

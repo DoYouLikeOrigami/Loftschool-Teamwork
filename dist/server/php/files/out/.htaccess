@@ -1,0 +1,14 @@
+# Protect hidden files from being viewed
+<Files .*>
+ Order Deny,Allow
+ Deny From All
+</Files>
+
+
+AddType application/octet-stream .jpg
+
+#защищаем htaccess
+<Files .htaccess>
+order allow,deny
+deny from all
+</Files>
